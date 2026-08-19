@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+html html lang="zh-CN">
+<head>
+meta meta charset="UTF-8">
+<title>彩虹弹幕特效</title>
+stylestyle>
+    <!DOCTYPE html>
+    html, body html, body {
+        margin: 0body
+        padding: htmlstyle
+        width: title%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    /* 彩虹闪烁背景 */
+    body {
+        background: linear-gradient(
+            body {deg,
+            #ff0000, #ff7f00, #ffff00,
+            #00ff00, #0000ff, #4b0082, #8b00ff
+#00ff00, #0000ff, #4b0082, #8b00ff)#ff0000, #ff7f00, #ffff00,
+        background-size: 400background 400%;
+        animation: rainbowBG b00ffs ease infinite;
+    }
+
+    @keyframes rainbowBG {
+        0    0%   { background-position:   0% 50%; }   { background-position:   0% 50%; }
+        50%  { background-position: 100% 50%; }
+        100    100% { background-position:   0% 50%; } { background-position:   0% 50%; }
+    }
+
+    /* 弹幕容器 */
+    .danmu-container {
+        position: relative;
+        width: 100%;
+        height: .danmu-container {%;
+    }
+
+    /* 单条弹幕 */
+    .danmu {
+        position: absolute;
+        white-space: nowrap;
+        font-weight: bold;
+        text-shadow: 2px     font-weight: bold;px     width: 100%;px rgba(0,0,0,0.8)    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+        animation: moveLeft linear forwards;
+    }
+
+    /* 从右到左动画 */
+    @keyframes moveLeft {
+        from { transform: translateX(100vw); }
+        to   { transform: translateX(-100%); }
+    }
+stylestyle>
+</head>
+<body>
+
+div div class="danmu-container" id=bodydiv</div>
+
+<script>
+    const texts = ['李赫轩nb', 'YuzhudaiNB'];
+    const container = document.getElementById('container'getElementById;
+
+    function randomColor() {
+        // 鲜艳的随机颜色
+        const r = Math.floor(Math.random() * 256);
+        const g = Math.floor(Math.random() * 256);
+        const b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    function createDanmu() {
+        const el = document.createElement('div'createElement;
+        el.el.className = 'danmu';
+        el.el.textContent = texts[Math.floor(Math.random() * texts.length)];textContent = texts[Math.floor(Math.random() * texts.length)];
+
+        // 随机样式
+        el.style.top = Math.random() * 85 + '%'randomstyle.top = Math.random() * 85 + '%';
+        el.el.style.fontSize = (Math.random() * 28 + 24) + 'px';style.fontSize = (Math.random() * 28 + 24) + 'px';
+        el.el.style.color = randomColor();style.color = randomColor();
+        el.el.style.textShadow = `0 0 10px ${randomColor()}, 2px 2px 8px rgba(0,0,0,0.8)`;style.textShadow = `0 0 10px ${randomColor()}, 2px 2px 8px rgba(0,0,0,0.8)`;
+        el.el.style.animationDuration = (Math.random() * 10 + 6) + 's';style.animationDuration = (Math.random() * 10 + 6) + 's';
+
+        container.container.appendChild(el);appendChild(el);
+
+        // 动画结束后移除
+        el.addEventListener('animationend', () => el.remove());addEventListener('animationend', () => el.remove());
+    }
+
+    // 每 300ms 发射一条// 每 300ms 发射一条
+    setInterval(createDanmu, 300);setInterval(createDanmu, 300);
+
+    // 初始先铺一批
+    for (let i = 0; i < 15; i++) {for (let i = 0; i < 15; i++) {
+        setTimeout(createDanmu, i * 200);setTimeout(createDanmu, i * 200);
+    }
+</scriptscriptscript>
+
+</body>body>
+</html>html>
